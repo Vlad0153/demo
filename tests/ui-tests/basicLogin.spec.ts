@@ -12,6 +12,5 @@ test('test login', async ({ page }) => {
   await page.locator('button#react-burger-menu-btn').click();
   page.pause()
   //await page.locator('.shopping_cart_link').click();
-
   ///.shopping_cart_link
 });

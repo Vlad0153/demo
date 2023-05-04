@@ -1,12 +1,11 @@
 // runt this test 
 import { test,expect } from '@playwright/test';
 import { LoginPage } from '../../pageObjects/loginPage';
-import{InventoryPage} from'../../pageObjects/inventoryPage';
-import { WebActions } from "../../lib/webActions";
+import{ InventoryPage } from'../../pageObjects/inventoryPage';
 import { standardUser } from "../../testData/userData";
 
 test.describe('Login feature',()=>{    
-    test.only('test simple login',async({page})=>{
+    test('test simple login',async({page})=>{
 
         const loginPage = new LoginPage(page);
         const homePage = new InventoryPage(page);
@@ -15,7 +14,7 @@ test.describe('Login feature',()=>{
             await loginPage.simpleLogin(standardUser.userName,standardUser.password);
             await expect(page).toHaveTitle(/Swag Labs/);
             await homePage.logOut();         
-            await page.pause();        
+            //await page.pause();        
         });
     });
 
@@ -25,12 +24,7 @@ test.describe('Login feature',()=>{
         await loginPage.openApplication();
             await expect(page).toHaveTitle(/Swag Labs/);
             await loginPage.imputUser(standardUser.userName)
-            await loginPage.imputPassword(standardUser.password)        
-            
-
-            await page.pause(); 
-        
-    
-    
+            await loginPage.imputPassword(standardUser.password) 
+            //await page.pause();     
     })
 });
