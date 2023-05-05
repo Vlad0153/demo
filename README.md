@@ -4,6 +4,11 @@ gitLab project: https://github.com/Vlad0153/demo.git
 install node: https://nodejs.org/en/download
 install playwright: npm install playwright
 
+Running the tests:
+-runs all tests unsing all browsers headless: npm run test
+-in order to run specific test file (inside the file are the extra commands) or chege the scripts inside package.json
+
+
 
 # demo
 Automation Demo

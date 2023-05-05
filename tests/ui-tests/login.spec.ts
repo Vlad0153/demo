@@ -1,7 +1,8 @@
-// runt this test 
+//commands run this tests 
 //headless: npm run test ./tests/ui-tests/login.spec.ts
 //headed: npm run testH ./tests/ui-tests/login.spec.ts
 //headed in Chrome: npm run testC ./tests/ui-tests/login.spec.ts
+//running a specific test inside this file use "test.only" before test description
 
 import { test,expect } from '@playwright/test';
 import { LoginPage } from '../../pageObjects/loginPage';

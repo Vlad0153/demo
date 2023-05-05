@@ -1,4 +1,4 @@
-import type { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { WebActions } from '../lib/webActions';
 
 let webActions:WebActions;
@@ -9,6 +9,8 @@ export class InventoryPage{
   
     menu = this.page.getByRole('button', { name: 'Open Menu' });
     logout = this.page.getByRole('link', { name: 'Logout' });
+    shoppingCartButton = this.page.locator('.shopping_cart_link');
+    shoppingCartList = this.page.locator('[class="cart_list"]');
     sauceLabsBackpack = this.page.locator('#item_4_img_link');
     addBackpackToCart = this.page.locator('[data-test="add-to-cart-sauce-labs-backpack"]');
     bikeLight = this.page.locator('#item_0_img_link');
@@ -35,5 +37,12 @@ export class InventoryPage{
         await this.addBikeLightToCart.isVisible()
         await this.addBikeLightToCart.isEnabled()
         await this.addBikeLightToCart.click();
-    };   
-  }
+    }; 
+    async itemsInCart():Promise<void>{
+        await webActions.verifyElementIsDisplayed(this.shoppingCartButton);
+        await this.shoppingCartButton.click();
+        await webActions.verifyElementIsDisplayed(this.shoppingCartList);
+        await expect(this.shoppingCartList).toContainText('Sauce Labs Backpack');
+        await expect(this.shoppingCartList).toContainText('Sauce Labs Bike Light');
+    };
+}

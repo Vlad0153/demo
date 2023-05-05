@@ -19,9 +19,11 @@ test('Autorization', async ({ request }) => {
 });
 
 //POST delay response
+//this request may random fail do to endpoint response timeout
 test('Returns a delayed response based on value set "max 10 sec"', async ({ request }) => {
-    const time = ['7'];
-    const delayedRequest = await request.post(`https://httpbin.org/delay/${time}`, {headers: {
+    const time = ['2'];
+    const delayedRequest = await request.post(`https://httpbin.org/delay/${time}`, {
+        headers: {
         'Accept': 'application/json',
     }  
     });  
