@@ -1,4 +1,4 @@
-import type { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { WebActions } from '../lib/webActions';
 import envUrl from '../testData/envUrls.json';
 
@@ -10,7 +10,8 @@ export class LoginPage{
 
   userName = this.page.locator('[data-test="username"]');
   password = this.page.locator('[data-test="password"]');
-  login = this.page.locator('[data-test="login-button"]');
+  loginButton = this.page.locator('[data-test="login-button"]');
+  loginError = this.page.locator('[data-test="error"]');
 
   constructor(private page: Page) {
 
@@ -29,15 +30,29 @@ export class LoginPage{
     await webActions.enterElementText(this.password,password);
   };
   async clickLogin():Promise<void>{
-    await this.login.click();
+    await this.loginButton.click();
   };
-
+  async clickLoginNoPassword():Promise<void>{
+    await this.loginButton.click();
+    await webActions.verifyElementIsDisplayed(this.loginError)
+    await expect(this.loginError).toContainText('Password is required')
+  };
   async simpleLogin(name:string,password:string): Promise<void> {
     await this.page.goto(envUrl.testEnv);
     await webActions.verifyElementIsDisplayed(this.userName);
     await webActions.enterElementText(this.userName,name);
     await webActions.verifyElementIsDisplayed(this.password);
     await webActions.enterElementText(this.password,password);
-    await webActions.clickElement(this.login);
+    await webActions.clickElement(this.loginButton);
   };
+  async lockedUserLogin(name:string,password:string): Promise<void> {
+    await this.page.goto(envUrl.testEnv);
+    await webActions.verifyElementIsDisplayed(this.userName);
+    await webActions.enterElementText(this.userName,name);
+    await webActions.verifyElementIsDisplayed(this.password);
+    await webActions.enterElementText(this.password,password);
+    await webActions.clickElement(this.loginButton);
+    await webActions.verifyElementIsDisplayed(this.loginError);
+    await expect(this.loginError).toContainText('this user has been locked out');
+  }; 
 }

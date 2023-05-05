@@ -1,3 +1,10 @@
+Demo project requirements:
+
+gitLab project: https://github.com/Vlad0153/demo.git
+install node: https://nodejs.org/en/download
+install playwright: npm install playwright
+
+
 # demo
 Automation Demo
 

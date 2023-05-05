@@ -17,8 +17,7 @@ export class InventoryPage{
     constructor(private page: Page) {
   
       webActions = new WebActions(this.page);
-    }; 
-    
+    };     
     async logOut():Promise<void>{
         await this.menu.isVisible()
         await this.menu.isEnabled()
@@ -27,9 +26,6 @@ export class InventoryPage{
         await this.logout.isEnabled()
         await this.logout.click();
     };
-
-    async
-
     async addToCartBackpack():Promise<void>{
         await this.addBackpackToCart.isVisible()
         await this.addBackpackToCart.isEnabled()
@@ -39,7 +35,5 @@ export class InventoryPage{
         await this.addBikeLightToCart.isVisible()
         await this.addBikeLightToCart.isEnabled()
         await this.addBikeLightToCart.click();
-    };
-
-   
+    };   
   }

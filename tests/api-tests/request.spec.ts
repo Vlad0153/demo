@@ -24,7 +24,6 @@ test('Returns a delayed response based on value set "max 10 sec"', async ({ requ
     const delayedRequest = await request.post(`https://httpbin.org/delay/${time}`, {headers: {
         'Accept': 'application/json',
     }  
-
     });  
     expect(delayedRequest.ok()).toBeTruthy()
     console.log(`Response status: ${delayedRequest.status()}`);
